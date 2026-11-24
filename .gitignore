@@ -1,0 +1,6 @@
+codec/
+build/
+__pycache__/
+*.wav
+*.iq
+out/
