@@ -18,7 +18,7 @@ stock firmware file or program flash dump. `tools/gen_codec_c.py` then staticall
 so it stays local as well.
 
 ```sh
-make codec STOCK=path/to/DM32.01.01.049.bin   # or a 1 MB program flash dump; needs a RadioFoundry checkout in ../RadioFoundry
+make codec STOCK=path/to/DM32.01.01.049.bin   # or a 1 MB program flash dump
 make                                          # needs ~/toolchains/csky-elf (or CSKY_BIN=...)
 build/ambe loop < in.s16 > out.s16            # 8 kHz mono s16le
 build/ambe enc < in.s16 > out.ambe            # 7 bytes (49 bits) per 20 ms frame
@@ -44,4 +44,5 @@ codec's own order, which is the order RadioFoundry's DMR and YSF code uses.
 ## Licence
 
 MIT, for the code in this repository. `third_party/radiofoundry/` is a copy of the YSF and FEC code from
-[RadioFoundry](https://github.com/RadioFoundry/RadioFoundry) (MIT, see its LICENSE and VERSION). The codec, and anything generated from it, is not covered by this licence.
+[RadioFoundry](https://github.com/RadioFoundry/RadioFoundry) (MIT, see its LICENSE and VERSION), and so are the
+firmware profiles in `tools/codec_profiles.py`. The codec, and anything generated from it, is not covered by this licence.

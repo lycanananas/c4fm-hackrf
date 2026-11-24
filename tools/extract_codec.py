@@ -5,8 +5,8 @@
 The codec belongs to DVSI/Baofeng. It is never stored in this repository: this tool reads your own file and writes
 the code, the table window and a small JSON description into codec/ (ignored by git).
 
-It reuses RadioFoundry's tools/hrc7000_codec.py (MIT) to recognize the file by SHA-256 and find the windows, so it
-accepts every build that tool knows (stock .bin files and 1 MB program flash reads).
+tools/codec_profiles.py (from RadioFoundry, MIT) recognizes the file by SHA-256 and finds the windows: every DM-32UV
+build RadioFoundry knows, as a stock .bin file or a 1 MB program flash read.
 """
 import argparse
 import hashlib
@@ -21,13 +21,11 @@ ROOT = os.path.dirname(HERE)
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("stock", help="DM-32UV stock firmware (.bin) or a program flash dump")
-    ap.add_argument("--rf", default=os.path.join(ROOT, "..", "RadioFoundry"),
-                    help="a RadioFoundry checkout (default: ../RadioFoundry)")
     ap.add_argument("-o", "--out", default=os.path.join(ROOT, "codec"), help="output directory (default: codec/)")
     a = ap.parse_args()
 
-    sys.path.insert(0, os.path.join(os.path.abspath(a.rf), "tools"))
-    import hrc7000_codec as hc  # noqa: E402
+    sys.path.insert(0, HERE)
+    import codec_profiles as hc  # noqa: E402
 
     stock = open(a.stock, "rb").read()
     try:
